@@ -25,12 +25,6 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Create android/ios folders if missing
-        run: |
-          if [ ! -d "android" ]; then
-            flutter create .
-          fi
-
       - name: Get packages
         run: flutter pub get
 
