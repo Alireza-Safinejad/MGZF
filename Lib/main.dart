@@ -6,8 +6,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key}); // استفاده از super.key برای SDK >=2.17
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,8 +17,6 @@ class MyApp extends StatelessWidget {
 }
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
-
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -52,7 +48,10 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Text(
               'GZ',
               style: TextStyle(
-                  fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold),
+                fontSize: 40,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -62,8 +61,6 @@ class _SplashScreenState extends State<SplashScreen> {
 }
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -72,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
   String _username = '';
   String _password = '';
   String _deviceId = '';
-  List<String> allowedDevices = ['device-id-sample1']; // بعداً UUID واقعی رو بذار
+  List<String> allowedDevices = ['device-id-sample1'];
 
   Future<void> _getDeviceId() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -88,16 +85,20 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login() async {
     await _getDeviceId();
     if (!allowedDevices.contains(_deviceId)) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('دستگاه مجاز نیست')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('دستگاه مجاز نیست')),
+      );
       return;
     }
     if (_username == 'admin' && _password == '123') {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => ShiftsPage()));
+        context,
+        MaterialPageRoute(builder: (context) => ShiftsPage()),
+      );
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('نام کاربری یا رمز اشتباه است')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('نام کاربری یا رمز اشتباه است')),
+      );
     }
   }
 
@@ -130,8 +131,6 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class ShiftsPage extends StatelessWidget {
-  const ShiftsPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +138,7 @@ class ShiftsPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('Gz.PNG'), // مسیر فایل اصلاح شد
+            image: AssetImage('Gz.PNG'),
             fit: BoxFit.cover,
           ),
         ),
@@ -161,8 +160,7 @@ class ShiftsPage extends StatelessWidget {
 
 class ShiftButton extends StatelessWidget {
   final String shift;
-
-  const ShiftButton({super.key, required this.shift});
+  ShiftButton({required this.shift});
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +171,8 @@ class ShiftButton extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ShiftDetailsPage(shift: shift)),
+              builder: (context) => ShiftDetailsPage(shift: shift),
+            ),
           );
         },
         child: Text(shift, style: TextStyle(fontSize: 20)),
@@ -185,8 +184,7 @@ class ShiftButton extends StatelessWidget {
 
 class ShiftDetailsPage extends StatelessWidget {
   final String shift;
-
-  const ShiftDetailsPage({super.key, required this.shift});
+  ShiftDetailsPage({required this.shift});
 
   final Map<String, dynamic> mockData = {
     'آلارم‌ها': 'آلارم سنسور 1, آلارم رطوبت بالا',
@@ -205,14 +203,12 @@ class ShiftDetailsPage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(16),
         children: mockData.entries
-            .map(
-              (e) => Card(
-                child: ListTile(
-                  title: Text(e.key),
-                  subtitle: Text(e.value.toString()),
-                ),
-              ),
-            )
+            .map((e) => Card(
+                  child: ListTile(
+                    title: Text(e.key),
+                    subtitle: Text(e.value.toString()),
+                  ),
+                ))
             .toList(),
       ),
     );
