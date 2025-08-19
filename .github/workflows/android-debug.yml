@@ -23,10 +23,12 @@ jobs:
         run: flutter pub get
 
       - name: Build APK
+        # مسیر فایل main.dart با توجه به پوشه‌ی شما (Lib)
         run: flutter build apk --debug -t Lib/main.dart
 
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        # نسخه جدید اکشن برای آپلود artifact
+        uses: actions/upload-artifact@v4
         with:
           name: app-debug
           path: build/app/outputs/flutter-apk/app-debug.apk
