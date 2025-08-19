@@ -48,10 +48,9 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Text(
               'GZ',
               style: TextStyle(
-                fontSize: 40,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+                  fontSize: 40,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -69,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
   String _username = '';
   String _password = '';
   String _deviceId = '';
-  List<String> allowedDevices = ['device-id-sample1'];
+  List<String> allowedDevices = ['device-id-sample1']; // بعداً UUID واقعی
 
   Future<void> _getDeviceId() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -160,6 +159,7 @@ class ShiftsPage extends StatelessWidget {
 
 class ShiftButton extends StatelessWidget {
   final String shift;
+
   ShiftButton({required this.shift});
 
   @override
@@ -169,11 +169,9 @@ class ShiftButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ShiftDetailsPage(shift: shift),
-            ),
-          );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ShiftDetailsPage(shift: shift)));
         },
         child: Text(shift, style: TextStyle(fontSize: 20)),
         style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
@@ -184,6 +182,7 @@ class ShiftButton extends StatelessWidget {
 
 class ShiftDetailsPage extends StatelessWidget {
   final String shift;
+
   ShiftDetailsPage({required this.shift});
 
   final Map<String, dynamic> mockData = {
