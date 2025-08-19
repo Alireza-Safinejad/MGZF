@@ -1,6 +1,6 @@
 name: mgzf
-description: A new Flutter project.
-publish_to: "none" # اگر نمی‌خوای روی pub.dev منتشر بشه، همینو بذار
+description: GZ Factory Monitoring App
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -9,14 +9,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.2
+  device_info_plus: ^9.0.0
+  flutter_localizations:
+    sdk: flutter
+  # سایر پکیج‌هایی که اپ اصلی استفاده می‌کند، اینجا اضافه شود
+  # مثلا provider, http و غیره
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/Gz.jpg.jpg
+    # اگر تصاویر یا فایل‌های دیگری در assets داری، مسیرشان را اضافه کن
