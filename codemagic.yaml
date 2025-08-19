@@ -1,32 +1,16 @@
 workflows:
   android_apk:
-    name: Build Android APK (GZ Prototype)
+    name: Build Android APK (Debug)
     max_build_duration: 60
     instance_type: linux_x2
     environment:
       flutter: stable
-      vars:
-        CM_KEYSTORE: ""   # برای دمو نیاز نیست
     scripts:
       - name: Flutter version
-        script: |
-          flutter --version
-      - name: Prepare project
-        script: |
-          # اگر پروژه کامل نیست، بسازش
-          if [ ! -d "android" ]; then
-            flutter create .
-          fi
-          flutter pub get
-      - name: Build APK
-        script: |
-          flutter build apk --release
+        script: flutter --version
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build debug APK
+        script: flutter build apk --debug
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
-    publishing:
-      email:
-        recipients:
-          - your@email.com
-        notify:
-          success: true
-          failure: true
+      - build/app/outputs/flutter-apk/app-debug.apk
